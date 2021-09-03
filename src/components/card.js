@@ -20,7 +20,7 @@ const Card = (article) => {
   // </div>
   //
 
-  // const { headline, authorPhoto, authorName } = article;
+  const { headline, authorPhoto, authorName } = article;
 
   const articleCard = document.createElement("div");
   const articleHeadline = document.createElement("div");
@@ -36,9 +36,9 @@ const Card = (article) => {
   imgContainer.classList.add("img-container");
 
   //values
-  articleHeadline.textContent = `${article.headline}`;
-  authorPhotoLink.setAttribute(`src`, `${article.authorPhoto}`);
-  authorNameSpan.textContent = `By ${article.authorName}`;
+  articleHeadline.textContent = `${headline}`;
+  authorPhotoLink.setAttribute(`src`, `${authorPhoto}`);
+  authorNameSpan.textContent = `By ${authorName}`;
 
   //nesting
   articleCard.appendChild(articleHeadline);
@@ -46,6 +46,10 @@ const Card = (article) => {
   articleAuthor.appendChild(imgContainer);
   imgContainer.appendChild(authorPhotoLink);
   articleAuthor.appendChild(authorNameSpan);
+
+  articleCard.addEventListener("click", () => {
+    console.log(articleHeadline);
+  });
 
   return articleCard;
 };
@@ -64,14 +68,37 @@ const cardAppender = (selector) => {
     const cardsContainer = document.querySelector(selector);
 
     const articles = resp.data.articles;
+    const { javascript, bootstrap, technology, jquery, node } = articles;
 
-    const articleKeys = Object.keys(articles);
-    console.log(articles[articleKeys[1]]);
-    for (let i = 0; i < articleKeys.length; i++) {
-      const cardInput = Card(articles[articleKeys[i]]);
-      console.log(cardInput);
+    javascript.forEach((article) => {
+      const cardInput = Card(article);
       cardsContainer.appendChild(cardInput);
-    }
+    });
+    bootstrap.forEach((article) => {
+      const cardInput = Card(article);
+      cardsContainer.appendChild(cardInput);
+    });
+    technology.forEach((article) => {
+      const cardInput = Card(article);
+      cardsContainer.appendChild(cardInput);
+    });
+    jquery.forEach((article) => {
+      const cardInput = Card(article);
+      cardsContainer.appendChild(cardInput);
+    });
+    node.forEach((article) => {
+      const cardInput = Card(article);
+      cardsContainer.appendChild(cardInput);
+    });
+
+    /* code below is the DRY solution i attempted but it didnt work */
+    // const articleKeys = Object.keys(articles);
+    // console.log(articles[articleKeys[1]]);
+    // for (let i = 0; i < articleKeys.length; i++) {
+    //   const cardInput = Card(articles[articleKeys[i]]);
+    //   console.log(cardInput);
+    //   cardsContainer.appendChild(cardInput);
+    // }
   });
 };
 
