@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,7 +19,36 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-}
+
+  // const { headline, authorPhoto, authorName } = article;
+
+  const articleCard = document.createElement("div");
+  const articleHeadline = document.createElement("div");
+  const articleAuthor = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const authorPhotoLink = document.createElement("img");
+  const authorNameSpan = document.createElement("span");
+
+  //classes
+  articleCard.classList.add("card");
+  articleHeadline.classList.add("headline");
+  articleAuthor.classList.add("author");
+  imgContainer.classList.add("img-container");
+
+  //values
+  articleHeadline.textContent = `${article.headline}`;
+  authorPhotoLink.setAttribute(`src`, `${article.authorPhoto}`);
+  authorNameSpan.textContent = `By ${article.authorName}`;
+
+  //nesting
+  articleCard.appendChild(articleHeadline);
+  articleCard.appendChild(articleAuthor);
+  articleAuthor.appendChild(imgContainer);
+  imgContainer.appendChild(authorPhotoLink);
+  articleAuthor.appendChild(authorNameSpan);
+
+  return articleCard;
+};
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -28,6 +59,20 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
 
-export { Card, cardAppender }
+  axios.get("http://localhost:5000/api/articles").then((resp) => {
+    const cardsContainer = document.querySelector(selector);
+
+    const articles = resp.data.articles;
+
+    const articleKeys = Object.keys(articles);
+    console.log(articles[articleKeys[1]]);
+    for (let i = 0; i < articleKeys.length; i++) {
+      const cardInput = Card(articles[articleKeys[i]]);
+      console.log(cardInput);
+      cardsContainer.appendChild(cardInput);
+    }
+  });
+};
+
+export { Card, cardAppender };
