@@ -8,10 +8,10 @@ const Header = (title, date, temp) => {
   //  <div class="header">
   //    <span class="date">{ date }</span>
   //    <h1>{ title }</h1>
-  //    <span class="temp">{ temp }</span>
+  //    <span class="temp">{ temp }
   //  </div>
   //
-}
+};
 
 const headerAppender = (selector) => {
   // TASK 2
@@ -20,6 +20,6 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-}
+};
 
-export { Header, headerAppender }
+export { Header, headerAppender };
