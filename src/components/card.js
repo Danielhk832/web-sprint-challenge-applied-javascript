@@ -68,36 +68,48 @@ const cardAppender = (selector) => {
     const cardsContainer = document.querySelector(selector);
 
     const articles = resp.data.articles;
-    const { javascript, bootstrap, technology, jquery, node } = articles;
+    // const { javascript, bootstrap, technology, jquery, node } = articles;
 
-    javascript.forEach((article) => {
-      const cardInput = Card(article);
-      cardsContainer.appendChild(cardInput);
-    });
-    bootstrap.forEach((article) => {
-      const cardInput = Card(article);
-      cardsContainer.appendChild(cardInput);
-    });
-    technology.forEach((article) => {
-      const cardInput = Card(article);
-      cardsContainer.appendChild(cardInput);
-    });
-    jquery.forEach((article) => {
-      const cardInput = Card(article);
-      cardsContainer.appendChild(cardInput);
-    });
-    node.forEach((article) => {
-      const cardInput = Card(article);
-      cardsContainer.appendChild(cardInput);
-    });
+    // javascript.forEach((article) => {
+    //   const cardInput = Card(article);
+    //   cardsContainer.appendChild(cardInput);
+    // });
+    // bootstrap.forEach((article) => {
+    //   const cardInput = Card(article);
+    //   cardsContainer.appendChild(cardInput);
+    // });
+    // technology.forEach((article) => {
+
+    //   cardsContainer.appendChild(cardInput);
+    // });
+    // jquery.forEach((article) => {
+    //   const cardInput = Card(article);
+    //   cardsContainer.appendChild(cardInput);
+    // });
+    // node.forEach((article) => {
+    //   const cardInput = Card(article);
+    //   cardsContainer.appendChild(cardInput);
+    // });
 
     /* code below is the DRY solution i attempted but it didnt work */
     // const articleKeys = Object.keys(articles);
     // console.log(articles[articleKeys[1]]);
+    // articleKeys.forEach((key) => {
+    //   cardsContainer.appendChild(Card(articles[key]));
+    // });
+
+    for (const prop in articles) {
+      // console.log(`${prop} in ${articles[prop]}`);
+      for (let i = 0; i < articles[prop].length; i++) {
+        const cardInput = Card(articles[prop][i]);
+        console.log(cardInput);
+        cardsContainer.appendChild(cardInput);
+      }
+    }
+
     // for (let i = 0; i < articleKeys.length; i++) {
-    //   const cardInput = Card(articles[articleKeys[i]]);
-    //   console.log(cardInput);
-    //   cardsContainer.appendChild(cardInput);
+    //   console.log(i);
+
     // }
   });
 };
